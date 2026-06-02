@@ -1,33 +1,19 @@
-function calculateBMI() {
+const hour = document.getElementById("hour");
+const minute = document.getElementById("minute");
+const second = document.getElementById("second");
 
-    let height = document.getElementById("height").value;
-    let weight = document.getElementById("weight").value;
+function setClock() {
+    const now = new Date();
 
-    if(height === "" || weight === ""){
-        alert("Enter Height and Weight");
-        return;
-    }
+    const sec = now.getSeconds();
+    const min = now.getMinutes();
+    const hr = now.getHours();
 
-    let bmi = weight / ((height / 100) * (height / 100));
-
-    document.getElementById("result").innerHTML =
-        "BMI : " + bmi.toFixed(2);
-
-    let condition = "";
-
-    if(bmi < 18.5){
-        condition = "Underweight";
-    }
-    else if(bmi < 25){
-        condition = "Normal Weight";
-    }
-    else if(bmi < 30){
-        condition = "Overweight";
-    }
-    else{
-        condition = "Obese";
-    }
-
-    document.getElementById("condition").innerHTML =
-        "Weight Condition : " + condition;
+    second.style.transform = `translateX(-50%) rotate(${sec * 6}deg)`;
+    minute.style.transform = `translateX(-50%) rotate(${min * 6}deg)`;
+    hour.style.transform =
+      `translateX(-50%) rotate(${hr * 30 + min * 0.5}deg)`;
 }
+
+setInterval(setClock, 1000);
+setClock();
